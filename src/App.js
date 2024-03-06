@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import {Home} from "./components/Home";
 import About from "./components/About"; // Import About if it exists
 import NoteState from "./context/notes/NoteState";
 
