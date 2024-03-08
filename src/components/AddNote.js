@@ -47,6 +47,20 @@ const AddNote = () => {
               placeholder="Enter your description"
               onChange={onChange}
             />
+            
+          </div>
+          <div className="form-group" style={{ marginBottom: "20px" }}>
+            <label htmlFor="tag">Tag</label>
+            <input
+              type="text"
+              name="tag"
+              className="form-control"
+              id="tag"
+              value={note.tag} // Bind input value to note.description
+              placeholder="Enter your tag"
+              onChange={onChange}
+            />
+            
           </div>
           <button
             type="submit"
