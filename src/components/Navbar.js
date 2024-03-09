@@ -1,5 +1,6 @@
 import {React, useEffect} from 'react'
 import { Link,useLocation } from "react-router-dom";
+import { MDBBtn } from 'mdb-react-ui-kit';
 import Logo from "./post-it.png"
 const Navbar = () => {
   let location=useLocation();
@@ -36,8 +37,15 @@ const Navbar = () => {
       
       </ul>
       <form className="d-flex" role="search">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-primary"style={{color:'white'}} type="submit">Search</button>
+     {/* <div className='mx-4'> <MDBBtn to='./login' outline rounded color='light'>
+        Login
+      </MDBBtn></div>
+      <div><MDBBtn to='./signup' outline rounded color='light'>
+        Register
+      </MDBBtn></div> */}
+       
+       <Link className="btn btn-outline-info mx-2" to="/login" role="button" aria-disabled="true">Login</Link>
+       <Link className="btn btn-outline-info mx-2" to="/signup" role="button" aria-disabled="true">Signup</Link>
       </form>
     </div>
   </div>

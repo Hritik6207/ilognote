@@ -57,47 +57,49 @@ router.post(
 // .then(user=> res.json(user))
 // .catch(err=> console.log(err));
 
-//Route 2: Authenticate a user --Login
-
+// Route 2: Authenticate a user -- Login
 router.post(
   "/login",
   [
     body("email", "Please provide a valid Email address.").isEmail(),
-    body("password", "Please provide a desired Password.").exists(),
+    body("password", "Password is required.").exists(),
   ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { email, password } = req.body;
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const { email, password } = req.body;
       let user = await User.findOne({ email });
       if (!user) {
         return res
           .status(400)
-          .json({ error: "Please try to login with correct credentials." });
+          .json({ error: "Invalid credentials. User not found" });
       }
-      const passwordCompare = await bcrypt.compare(password, user.password);
-      if (!passwordCompare) {
-        return res.status(400).json()({
-          error: "Please try to login with correct credentials.",
-        });
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ error: "Invalid credentials. Password incorrect" });
       }
-      const data = {
+
+      const payload = {
         user: {
           id: user.id,
         },
       };
-      const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json({ authtoken });
+
+      const authtoken = jwt.sign(payload, JWT_SECRET);
+      res.json({ success: true, authtoken });
     } catch (error) {
-      console.log(error.message);
-      res.status(500).send("Internal server error occured.");
+      console.error(error.message);
+      res.status(500).send("Server Error");
     }
   }
 );
-
 //Router 3: Fetching User
 
 router.post(
