@@ -24,6 +24,7 @@ router.post(
     body("description", "Please provide a valid description.").isLength({
       min: 4,
     }),
+    body("tag", "Please provide a valid tag."),
   ],
   async (req, res) => {
     const { title, description, tag } = req.body;

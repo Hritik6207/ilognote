@@ -31,6 +31,7 @@ const AddNote = () => {
               value={note.title} // Bind input value to note.title
               onChange={onChange}
               placeholder="Enter your note"
+              minLength={4} required
             />
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your notes with anyone else.
@@ -46,6 +47,7 @@ const AddNote = () => {
               value={note.description} // Bind input value to note.description
               placeholder="Enter your description"
               onChange={onChange}
+              minLength={4} required
             />
             
           </div>
@@ -63,6 +65,7 @@ const AddNote = () => {
             
           </div>
           <button
+          disabled={note.title.length<4 ||note.description.length<4}
             type="submit"
             className="btn btn-primary"
             onClick={handleClick}

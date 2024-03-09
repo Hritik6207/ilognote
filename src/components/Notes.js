@@ -5,21 +5,22 @@ import AddNote from "./AddNote"; // Assuming you have AddNote component imported
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, getNotes } = context;
+  const { notes, getNotes ,editNote} = context;
   useEffect(() => {
     getNotes();
   }, []);
 
   const ref = useRef(null);
-  const [note, setNote] = useState({ title: "", description: "", tag: "" });
+  const refClose = useRef(null);
+  const [note, setNote] = useState({id: "", etitle: "", edescription: "", etag: "" });
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({etitle:currentNote.title, edescription: currentNote.description,etag:currentNote.tag})
+    setNote({id: currentNote._id, etitle:currentNote.title, edescription: currentNote.description,etag:currentNote.tag})
   };
 
   const handleClick = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setNote({ title: "", description: "", tag: "" }); // Clear the input fields after adding the note
+    editNote(note.id,note.etitle,note.edescription,note.etag)
+   refClose.current.click()
   };
 
   const onChange = (e) => {
@@ -56,6 +57,7 @@ const Notes = () => {
               aria-describedby="emailHelp"
               value={note.etitle} // Bind input value to note.title
               onChange={onChange}
+              minLength={4} required
               placeholder="Enter your note"
             />
             <small id="emailHelp" className="form-text text-muted">
@@ -72,6 +74,7 @@ const Notes = () => {
               value={note.edescription} // Bind input value to note.description
               placeholder="Enter your description"
               onChange={onChange}
+              minLength={4} required
             />
             
           </div>
@@ -91,8 +94,8 @@ const Notes = () => {
 
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button onClick={handleClick} type="button" className="btn btn-primary">Update</button>
+        <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button disabled={note.etitle.length<4 ||note.edescription.length<4} onClick={handleClick} type="button" className="btn btn-primary">Update</button>
       </div>
     </div>
   </div>
@@ -101,6 +104,7 @@ const Notes = () => {
       <div className="row my-3">
         <div className="col-md-10 offset-md-1">
           <h4 className="text-center mb-4">Your Notes</h4>
+          <div className="text-center mb-4">{notes.length===0 && 'Add your notes here'}</div>
           <div className="row">
             {notes.map((note, index) => (
               <NoteItem key={index} updateNote={updateNote} note={note} />

@@ -4,7 +4,6 @@ import Logo from "./post-it.png"
 const Navbar = () => {
   let location=useLocation();
   useEffect(()=>{
-    console.log(location.pathname)
   })
   return (
     <div>
