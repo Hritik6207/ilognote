@@ -41,13 +41,17 @@ const Login = (props) => {
     <div>
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
-          <MDBCol col="10" md="6">
+        <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+
+          <MDBCol col="4" md="11">
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
               className="img-fluid"
               alt="Phone image"
             />
           </MDBCol>
+          </MDBCol>
+
 
           <MDBCol col="4" md="6">
             <form onSubmit={handleSubmit}>
