@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   MDBContainer,
   MDBCol,
   MDBRow,
   MDBBtn,
-  MDBInput,
-  MDBCheckbox,
+  MDBInput
 } from "mdb-react-ui-kit";
 
 const Login = (props) => {
@@ -28,7 +28,7 @@ const Login = (props) => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      localStorage.setItem('token', json.authtoken);
+      localStorage.setItem("token", json.authtoken);
       navigate("/");
     } else {
       alert("Invalid Credentials");
@@ -41,17 +41,18 @@ const Login = (props) => {
     <div>
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
-        <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
-
-          <MDBCol col="4" md="11">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-              className="img-fluid"
-              alt="Phone image"
-            />
+          <MDBCol
+            md="6"
+            className="text-center text-md-start d-flex flex-column justify-content-center"
+          >
+            <MDBCol col="4" md="11">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                className="img-fluid"
+                alt="Phone image"
+              />
+            </MDBCol>
           </MDBCol>
-          </MDBCol>
-
 
           <MDBCol col="4" md="6">
             <form onSubmit={handleSubmit}>
@@ -78,13 +79,7 @@ const Login = (props) => {
                 />
 
                 <div className="d-flex justify-content-between mx-4 mb-4 ">
-                  <MDBCheckbox
-                    name="flexCheck"
-                    value=""
-                    id="flexCheckDefault"
-                    label="Remember me"
-                  />
-                  <a href="!#">Forgot password?</a>
+                  <Link to="/signup">Forgot password?</Link>
                 </div>
                 <div className="text-center text-md-center mt-4 pt-2">
                   <MDBBtn className="mb-2 w-25" size="md">
@@ -92,9 +87,9 @@ const Login = (props) => {
                   </MDBBtn>
                   <p className="small fw-bold mt-2 pt-1 mb-2">
                     Don't have an account?{" "}
-                    <a href="#!" className="link-danger">
+                    <Link to="/signup" className="link-danger">
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>

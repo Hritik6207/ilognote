@@ -1,8 +1,15 @@
 import {React, useEffect} from 'react'
 import { Link,useLocation } from "react-router-dom";
-import { MDBBtn } from 'mdb-react-ui-kit';
 import Logo from "./post-it.png"
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout =()=>{
+  localStorage.removeItem('token');
+  navigate("/login");
+}
+
   let location=useLocation();
   useEffect(()=>{
   })
@@ -36,17 +43,11 @@ const Navbar = () => {
         </li>
       
       </ul>
-      <form className="d-flex" role="search">
-     {/* <div className='mx-4'> <MDBBtn to='./login' outline rounded color='light'>
-        Login
-      </MDBBtn></div>
-      <div><MDBBtn to='./signup' outline rounded color='light'>
-        Register
-      </MDBBtn></div> */}
-       
+      {!localStorage.getItem('token')?<form className="d-flex" role="search">
+
        <Link className="btn btn-outline-info mx-2" to="/login" role="button" aria-disabled="true">Login</Link>
        <Link className="btn btn-outline-info mx-2" to="/signup" role="button" aria-disabled="true">Signup</Link>
-      </form>
+      </form>:<button onClick={handleLogout} className="btn btn-outline-info mx-2">Logout</button>}
     </div>
   </div>
 </nav>
