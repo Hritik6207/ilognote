@@ -49,7 +49,7 @@ const Login = (props) => {
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                 className="img-fluid"
-                alt="Phone image"
+                alt="Phone emage"
               />
             </MDBCol>
           </MDBCol>
